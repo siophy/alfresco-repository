@@ -29,7 +29,6 @@ import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.util.Pair;
 import org.apache.commons.logging.Log;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -43,14 +42,10 @@ import org.mockito.Spy;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 /**
@@ -68,10 +63,7 @@ public class RemoteTransformerClientTest
     @Mock private CloseableHttpResponse mockHttpResponse;
     @Mock private HttpEntity mockRequestEntity;
     @Mock private HttpEntity mockResponseEntity;
-    @Mock private Header mockResponseContentType;
-    @Mock private Header mockResponseContentEncoding;
     @Mock private StatusLine mockStatusLine;
-    @Mock private HttpEntity mockReqEntity;
 
     @Spy private RemoteTransformerClient remoteTransformerClient = new RemoteTransformerClient("TRANSFORMER", "http://localhost:1234/test");
 
@@ -95,16 +87,6 @@ public class RemoteTransformerClientTest
         when(mockHttpResponse.getStatusLine()).thenReturn(mockStatusLine);
         when(mockHttpResponse.getEntity()).thenReturn(mockResponseEntity);
         when(mockStatusLine.getStatusCode()).thenReturn(200);
-
-//        when(mockResponseEntity.getContentLength()).thenReturn(1024L);
-//        when(mockResponseEntity.getContentType()).thenReturn(mockResponseContentType);
-//        when(mockResponseEntity.getContentEncoding()).thenReturn(mockResponseContentEncoding);
-//        long responseContentLength = resEntity.getContentLength();
-//        Header responseContentType = resEntity.getContentType();
-//        Header responseContentEncoding = resEntity.getContentEncoding();
-
-//        when(mockInputStream.)
-
     }
 
     private void assertRequestTransformError(String expectedMessage)
