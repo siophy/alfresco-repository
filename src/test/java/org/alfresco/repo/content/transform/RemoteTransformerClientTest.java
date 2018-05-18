@@ -127,7 +127,7 @@ public class RemoteTransformerClientTest
     }
 
     // Strip the number for AlfrescoRuntimeExceptions
-    // 03030000 Remote TRANSFORMER check command returned a 0 status AN ERROR MESSAGE http://localhost:1234/test/version
+    // 03030000 Remote TRANSFORMER check command returned a 0 status AN ERROR MESSAGE http://localhost:1234/test/ready
     private String getMessage(Exception e)
     {
         String msg = e.getMessage();
@@ -165,7 +165,7 @@ public class RemoteTransformerClientTest
 
         Pair<Boolean, String> available = remoteTransformerClient.check(mockLogger);
         assertFalse("Any failure should result in false", available.getFirst());
-        assertEquals("Remote TRANSFORMER check returned a 1234 status AN ERROR MESSAGE http://localhost:1234/test/version",
+        assertEquals("Remote TRANSFORMER check returned a 1234 status AN ERROR MESSAGE http://localhost:1234/test/ready",
                 getMessage(available.getSecond()));
     }
 
@@ -222,7 +222,7 @@ public class RemoteTransformerClientTest
         assertFalse("Any failure should result in false", available.getFirst());
         assertFalse(remoteTransformerClient.isAvailable());
 
-        // Mock a normal response from the /version request. It will not be made until the end of the wait period
+        // Mock a normal response from the /ready request. It will not be made until the end of the wait period
         doReturn(mockHttpResponse).when(remoteTransformerClient).execute(any(), any(HttpGet.class));
 
         // ------------- If we check during the wait period there should be no request
