@@ -225,7 +225,7 @@ public class RemoteTransformerClient
             return new Pair<>(null, null);
         }
 
-        String url = baseUrl + "/ready";
+        String url = baseUrl + "/version";
         HttpGet httpGet = new HttpGet(url);
 
         if (logger.isDebugEnabled())
